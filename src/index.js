@@ -324,7 +324,6 @@ function selectCard1(event) {
     }
   }
 
-  cardsPlay1.push(cards.get(cont));
   cards.delete(cont);
   cont++;
   render();
@@ -335,10 +334,13 @@ function selectCard1(event) {
 
 function selectCard2(event) {
   event.preventDefault();
+  //let pushCardCont = false;
 
   switch (cards.get(cont).name) {
     case 'diamond': {
-      cardsPlay2Diamond.push(cards.get(cont));
+      cardsPlay2Diamond.push(cards.get(cont));      
+        if(cardsPlay1RestCastle.indexOf.color === colorCastlePlay1Selec)      
+        cardDiamond();      
       break;
     }
     case 'fairy': {
@@ -346,6 +348,8 @@ function selectCard2(event) {
       break;
     }
     case 'witch': {
+      //pushCardCont = true;
+      restCardsPlayers = restCardsPlayers.concat(cards.get(cont));
       cardWitch();
       break;
     }
@@ -363,6 +367,11 @@ function selectCard2(event) {
         } else if (cards.get(cont).color === colorCastlePlay2Selec) {
           cardsPlay2CastleSel.push(cards.get(cont));
           cardsPlay2CastleSel.sort((a, b) => a.position - b.position);
+          if(cardsPlay2CastleSel.length===6){
+            let messageWinPlay1 = window.prompt('Jugador2: Ha ganado');
+            document.getElementById('butPla2').disabled = false;
+            document.getElementById('butPla1').disabled = false;
+          }
         } else {
           cardsPlay2RestCastle.push(cards.get(cont));
           cardsPlay2RestCastle.sort((a, b) => a.position - b.position);
@@ -371,11 +380,11 @@ function selectCard2(event) {
         cardsPlay2RestCastle.push(cards.get(cont));
         cardsPlay2RestCastle.sort((a, b) => a.position - b.position);
       }
+      cardsPlay2.push(cards.get(cont));
       break;
     }
-  }
-  //Ojo si es una bruja esta carta será una bruja y se tiene que añadir en las cartas restantes
-  cardsPlay2.push(cards.get(cont));
+  } 
+
   cards.delete(cont);
   cont++;
   render();
@@ -386,14 +395,13 @@ function selectCard2(event) {
 
 function cardWitch() {
   let cardsTe = new Array();
-  let rest= new Array();
+  let rest = new Array();
   console.log('es una bruja ' + cards.get(cont).name);
   let messageWitch = window.prompt('Jugador2: Has seleccionada una bruja');
   console.log('jugardor 2 ha encontrado una bruja');
   if (cardsPlay2Fairy.length > 0) {
     //restCardsPlayers = cardsPlay2Fairy[0];
-    restCardsPlayers.concat=restCardsPlayers = cardsPlay2Fairy.splice(0, 1);
-    
+    restCardsPlayers = restCardsPlayers.concat = cardsPlay2Fairy.splice(0, 1);
     //cont++;
   } else {
     cardsTe = new Array(
@@ -401,18 +409,20 @@ function cardWitch() {
       ...cardsPlay2Diamond,
       ...cardsPlay2CastleSel,
     );
-   
+
     debugger;
     if (cardsTe.length > 2) {
-      restCardsPlayers=restCardsPlayers.concat(restCardsPlayers = cardsTe.splice(0, 3));
+      restCardsPlayers = restCardsPlayers.concat(
+        (restCardsPlayers = cardsTe.splice(0, 3)),
+      );
     } else {
       switch (cardsTe.length) {
         case 2: {
-          rrestCardsPlayers.concat=restCardsPlayers = cardsTe.splice(0, 2);
+          restCardsPlayers = restCardsPlayers.concat = cardsTe.splice(0, 2);
           break;
         }
         case 1: {
-          restCardsPlayers.concat=restCardsPlayers= cardsTe.splice(0, 1);
+          restCardsPlayers = restCardsPlayers.concat = cardsTe.splice(0, 1);
           break;
         }
       }
@@ -434,7 +444,18 @@ function cardWitch() {
     ...cardsPlay2Diamond,
     ...cardsPlay2CastleSel,
   );
-  cardsPlay2.splice(0, ''); 
+  cardsPlay2.splice(0, '');
+}
+
+function cardDiamond() {
+  debugger;
+  let messageDiamond = window.prompt(
+    `Jugador2: Tienes tres diamantes puedes robarle un castillo de color ${colorCastlePlay2Selec} al Jugador1`);
+    if(cardsPlay2Diamond.length > 2) { 
+    //Le robo al jugador1 una del castillo que estoy constuyendo
+    cardsPlay2CastleSel.push(cardsPlay1RestCastle.splice(inx, 1));
+    restCardsPlayers = restCardsPlayers.concat = cardsPlay2Diamond.splice(0, 1);
+  }
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -476,7 +497,8 @@ function randomCards() {
       j++;
     }
   }
-  console.log('Resultado array orderCard ' + orderCard);
+  console.table('Resultado array orderCard ' + orderCard);
+
   return orderCard;
 }
 
