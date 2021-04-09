@@ -87,10 +87,14 @@ let colorCastlePlay1Selec = '';
 let colorCastlePlay2Selec = '';
 
 let cont = 0;
+
 let restCardsPlayers = new Array();
 
 let castSelectPlay1 = false;
 let castSelectPlay2 = false;
+
+let winner = false;
+let loop = false;
 
 document.getElementById('butPla1').disabled = true;
 document.getElementById('butPla2').disabled = true;
@@ -252,6 +256,7 @@ function render() {
 }
 
 function startPlay(event) {
+  let contNumCards = 55;
   cardsPlay1 = [];
   cardsPlay2 = [];
 
@@ -279,12 +284,16 @@ function startPlay(event) {
 
   document.getElementById('butPla1').disabled = false;
 
-  cards = shufflingCards();
+  cards = shufflingCards(contNumCards);
   render();
 }
 function selectCard1(event) {
   event.preventDefault();
-
+  if (cards.size=== 0) {
+    debugger;
+    cards = shufflingCards(restCardsPlayers.length);
+    cont=0;
+  }
   switch (cards.get(cont).name) {
     case 'diamond': {
       cardsPlay1Diamond.push(cards.get(cont));
@@ -299,7 +308,8 @@ function selectCard1(event) {
     }
     case 'castle': {
       console.log('entro en switch castle Jugador2');
-      if (colorCastlePlay2Selec !== cards.get(cont)) {
+
+      if (colorCastlePlay2Selec !== cards.get(cont).color) {
         if (!castSelectPlay1) {
           castSelectPlay1 = true;
           colorCastlePlay1Selec = cards.get(cont).color;
@@ -334,68 +344,106 @@ function selectCard1(event) {
 
 function selectCard2(event) {
   event.preventDefault();
-  //let pushCardCont = false;
+  let stealCastle = new Array();
+  let idx = cardsPlay1RestCastle
+    .map((castle) => castle.color)
+    .indexOf(colorCastlePlay2Selec);
+  
+  if (cardsPlay2CastleSel.length === 0) {
+    castSelectPlay2 = false;
+    colorCastlePlay2Selec = '';
+  }
+  //Comprobamos si tenemos más de dos diamantes
+  //Si el castillo que estamos construyendo coindice con una de las cartas
+  //que sobran del Jugador 1 intercambiamos tres diamantes por una carta castillo
+  
+  if (cardsPlay2Diamond.length > 2 && idx !== -1) {
+    let messageDiamond = window.prompt(
+      `Jugador2: Tienes tres diamantes puedes robarle un castillo de color ${colorCastlePlay2Selec} al Jugador1`,
+    );
+    //Le robo al jugador1 una del castillo que estoy constuyendo
+    stealCastle = cardsPlay1RestCastle.splice(idx, 1);
+    cardsPlay2CastleSel.push(...stealCastle);
+    restCardsPlayers = restCardsPlayers.concat = cardsPlay2Diamond.splice(0, 3);
+    cardsPlay2Diamond.splice(0, '');
 
-  switch (cards.get(cont).name) {
-    case 'diamond': {
-      cardsPlay2Diamond.push(cards.get(cont));      
-        if(cardsPlay1RestCastle.indexOf.color === colorCastlePlay1Selec)      
-        cardDiamond();      
-      break;
+    if (cardsPlay2CastleSel.length === 6) {
+      winner = true;
+      let messageWinPlay1 = window.prompt('Jugador2: Has ganado');
     }
-    case 'fairy': {
-      cardsPlay2Fairy.push(cards.get(cont));
-      break;
+  } else {
+    if (cards.size=== 0) {
+      debugger;
+      cards = shufflingCards(restCardsPlayers.length);
+      cont=0;
+      //randomCards(restCardsPlayers);
     }
-    case 'witch': {
-      //pushCardCont = true;
-      restCardsPlayers = restCardsPlayers.concat(cards.get(cont));
-      cardWitch();
-      break;
-    }
-    case 'castle': {
-      console.log('entro en switch castle Jugador1');
-      if (colorCastlePlay1Selec !== cards.get(cont)) {
-        if (!castSelectPlay2) {
-          castSelectPlay2 = true;
-          colorCastlePlay2Selec = cards.get(cont).color;
-          cardsPlay2CastleSel.push(cards.get(cont));
-          cardsPlay2CastleSel.sort((a, b) => a.position - b.position);
-          console.log(
-            'color del Castillo seleccionada jugador2 ' + colorCastlePlay2Selec,
-          );
-        } else if (cards.get(cont).color === colorCastlePlay2Selec) {
-          cardsPlay2CastleSel.push(cards.get(cont));
-          cardsPlay2CastleSel.sort((a, b) => a.position - b.position);
-          if(cardsPlay2CastleSel.length===6){
-            let messageWinPlay1 = window.prompt('Jugador2: Ha ganado');
-            document.getElementById('butPla2').disabled = false;
-            document.getElementById('butPla1').disabled = false;
+    switch (cards.get(cont).name) {
+      case 'diamond': {
+        cardsPlay2Diamond.push(cards.get(cont));
+        break;
+      }
+      case 'fairy': {
+        cardsPlay2Fairy.push(cards.get(cont));
+        break;
+      }
+      case 'witch': {
+        //pushCardCont = true;
+        restCardsPlayers = restCardsPlayers.concat(cards.get(cont));
+        cardWitch();
+        break;
+      }
+      case 'castle': {
+        console.log('entro en switch castle Jugador1');
+        if (colorCastlePlay1Selec !== cards.get(cont).color) {
+          if (!castSelectPlay2) {
+            castSelectPlay2 = true;
+            colorCastlePlay2Selec = cards.get(cont).color;
+            cardsPlay2CastleSel.push(cards.get(cont));
+            cardsPlay2CastleSel.sort((a, b) => a.position - b.position);
+            console.log(
+              'color del Castillo seleccionada jugador2 ' +
+                colorCastlePlay2Selec,
+            );
+          } else if (cards.get(cont).color === colorCastlePlay2Selec) {
+            cardsPlay2CastleSel.push(cards.get(cont));
+            cardsPlay2CastleSel.sort((a, b) => a.position - b.position);
+            if (cardsPlay2CastleSel.length === 6) {
+              winner = true;
+              let messageWinPlay1 = window.prompt('Jugador2: Has ganado');
+              /*document.getElementById('butPla2').disabled = false;
+              document.getElementById('butPla1').disabled = false;*/
+            }
+          } else {
+            cardsPlay2RestCastle.push(cards.get(cont));
+            cardsPlay2RestCastle.sort((a, b) => a.position - b.position);
           }
         } else {
           cardsPlay2RestCastle.push(cards.get(cont));
           cardsPlay2RestCastle.sort((a, b) => a.position - b.position);
         }
-      } else {
-        cardsPlay2RestCastle.push(cards.get(cont));
-        cardsPlay2RestCastle.sort((a, b) => a.position - b.position);
+        cardsPlay2.push(cards.get(cont));
+        break;
       }
-      cardsPlay2.push(cards.get(cont));
-      break;
     }
-  } 
 
-  cards.delete(cont);
-  cont++;
+    cards.delete(cont);
+    cont++;
+  }
   render();
   //Activación desactivación de los Botones
-  document.getElementById('butPla2').disabled = true;
-  document.getElementById('butPla1').disabled = false;
+  if (!winner) {
+    document.getElementById('butPla2').disabled = true;
+    document.getElementById('butPla1').disabled = false;
+  } else {
+    document.getElementById('butPla2').disabled = false;
+    document.getElementById('butPla1').disabled = false;
+  }
 }
 
 function cardWitch() {
   let cardsTe = new Array();
-  let rest = new Array();
+  //let rest = new Array();
   console.log('es una bruja ' + cards.get(cont).name);
   let messageWitch = window.prompt('Jugador2: Has seleccionada una bruja');
   console.log('jugardor 2 ha encontrado una bruja');
@@ -447,13 +495,15 @@ function cardWitch() {
   cardsPlay2.splice(0, '');
 }
 
-function cardDiamond() {
+function cardDiamond(stealCast) {
   debugger;
-  let messageDiamond = window.prompt(
-    `Jugador2: Tienes tres diamantes puedes robarle un castillo de color ${colorCastlePlay2Selec} al Jugador1`);
-    if(cardsPlay2Diamond.length > 2) { 
+  if (cardsPlay2Diamond.length > 2) {
+    let messageDiamond = window.prompt(
+      `Jugador2: Tienes tres diamantes puedes robarle un castillo de color ${colorCastlePlay2Selec} al Jugador1, el Jugador
+      1 tiene un castillo de color ${colorCastlePlay2Selec}`,
+    );
     //Le robo al jugador1 una del castillo que estoy constuyendo
-    cardsPlay2CastleSel.push(cardsPlay1RestCastle.splice(inx, 1));
+    cardsPlay2CastleSel.push(stealCast);
     restCardsPlayers = restCardsPlayers.concat = cardsPlay2Diamond.splice(0, 1);
   }
 }
@@ -479,17 +529,13 @@ document.addEventListener('DOMContentLoaded', function () {
 // ¡Usando Math.round() te dará una distribución no-uniforme!
 // Función que devuelve la carta seleccionada al azar - total son 55 cartas
 // se cambiara el valor max dependiendo del número de cartas restantes
-let max;
-let min;
-let orderCard;
-let j;
-function randomCards() {
-  j = 0;
-  max = 55;
-  min = 0;
-  orderCard = new Array();
-  for (let i = 0; i < 55; i++) {
-    let numValueCard = Math.floor(Math.random() * (max - min)) + min;
+function randomCards(contC) {
+  debugger;
+  let j = 0;
+  let min = 0;
+  let orderCard = new Array();
+  for (let i = 0; i < contC; i++) {
+    let numValueCard = Math.floor(Math.random() * (contC - min)) + min;
     if (orderCard.indexOf(numValueCard) != -1) {
       i--;
     } else {
@@ -498,15 +544,14 @@ function randomCards() {
     }
   }
   console.table('Resultado array orderCard ' + orderCard);
-
   return orderCard;
 }
 
-let arrayCard;
+//let arrayCard;
 
 function addCards() {
   castSelectPlay1 = false;
-  arrayCard = new Array();
+  let arrayCard = new Array();
   let j = 0;
   for (let i = 0; i < 3; i++) {
     arrayCard[j] = new Fairy('fairy', j, `imageFairy${j}`);
@@ -569,12 +614,20 @@ function addCards() {
 }
 
 //Empieza el Juego y barajamos
-let shufflingC;
-let arrCard = new Array();
-function shufflingCards() {
-  shufflingC = new Map();
-  let ranC = randomCards();
-  let arrCard = addCards();
+
+function shufflingCards(contNumCards) {
+  debugger;
+  let arrCard = new Array();
+  let shufflingC = new Map();
+  let ranC = randomCards(contNumCards);
+  //Resto de rondas
+  if (contNumCards < 55) {
+    debugger;
+    arrCard = restCardsPlayers;
+    //Primera ronda
+  } else {
+    arrCard = addCards();
+  }
   for (let i = 0; i < ranC.length; i++) {
     shufflingC.set(i, arrCard[ranC[i]]);
   }
