@@ -147,82 +147,99 @@ function renderItem(cardsP, index) {
       tr1.appendChild(td1);
       break;
     case 31:
-      td1.innerHTML = '<img src="/dist/castillorosa1.jpg"/>';
+      td1.innerHTML = '<img src="/dist/castillorosa1.png"/>';
       tr1.appendChild(td1);
       break;
     case 32:
-      td1.innerHTML = '<img src="/dist/castillorosa2.jpg"/>';
+      td1.innerHTML = '<img src="/dist/castillorosa2.png"/>';
       tr1.appendChild(td1);
       break;
     case 33:
-      td1.innerHTML = '<img src="/dist/castillorosa3.jpg"/>';
+      td1.innerHTML = '<img src="/dist/castillorosa3.png"/>';
       tr1.appendChild(td1);
       break;
     case 34:
-      td1.innerHTML = '<img src="/dist/castillorosa4.jpg"/>';
+      td1.innerHTML = '<img src="/dist/castillorosa4.png"/>';
       tr1.appendChild(td1);
       break;
     case 35:
-      td1.innerHTML = '<img src="/dist/castillorosa5.jpg"/>';
+      td1.innerHTML = '<img src="/dist/castillorosa5.png"/>';
       tr1.appendChild(td1);
       break;
     case 36:
-      td1.innerHTML = '<img src="/dist/castillorosa6.jpg"/>';
+      td1.innerHTML = '<img src="/dist/castillorosa6.png"/>';
       tr1.appendChild(td1);
       break;
     case 37:
+      td1.innerHTML = '<img src="/dist/castilloazul1.png"/>';
+      tr1.appendChild(td1);
+      break;
     case 38:
+      td1.innerHTML = '<img src="/dist/castilloazul2.png"/>';
+      tr1.appendChild(td1);
+      break;
     case 39:
+      td1.innerHTML = '<img src="/dist/castilloazul3.png"/>';
+      tr1.appendChild(td1);
+      break;
     case 40:
+      td1.innerHTML = '<img src="/dist/castilloazul4.png"/>';
+      tr1.appendChild(td1);
+      break;
     case 41:
+      td1.innerHTML = '<img src="/dist/castilloazul5.png"/>';
+      tr1.appendChild(td1);
+      break;
     case 42:
+      td1.innerHTML = '<img src="/dist/castilloazul6.png"/>';
+      tr1.appendChild(td1);
       break;
     case 43:
-      td1.innerHTML = '<img src="/dist/castilloverde1.jpeg"/>';
+      td1.innerHTML = '<img src="/dist/castilloverde1.png"/>';
       tr1.appendChild(td1);
       break;
     case 44:
-      td1.innerHTML = '<img src="/dist/castilloverde2.jpeg"/>';
+      td1.innerHTML = '<img src="/dist/castilloverde2.png"/>';
       tr1.appendChild(td1);
       break;
     case 45:
-      td1.innerHTML = '<img src="/dist/castilloverde3.jpeg"/>';
+      td1.innerHTML = '<img src="/dist/castilloverde3.png"/>';
       tr1.appendChild(td1);
       break;
     case 46:
-      td1.innerHTML = '<img src="/dist/castilloverde4.jpeg"/>';
+      td1.innerHTML = '<img src="/dist/castilloverde4.png"/>';
       tr1.appendChild(td1);
       break;
     case 47:
-      td1.innerHTML = '<img src="/dist/castilloverde5.jpeg"/>';
+      td1.innerHTML = '<img src="/dist/castilloverde5.png"/>';
       tr1.appendChild(td1);
       break;
     case 48:
-      td1.innerHTML = '<img src="/dist/castilloverde6.jpeg"/>';
+      td1.innerHTML = '<img src="/dist/castilloverde6.png"/>';
       tr1.appendChild(td1);
       break;
     case 49:
-      td1.innerHTML = '<img src="/dist/castilloamarillo1.jpeg"/>';
+      td1.innerHTML = '<img src="/dist/castilloamarillo1.png"/>';
       tr1.appendChild(td1);
       break;
     case 50:
-      td1.innerHTML = '<img src="/dist/castilloamarillo2.jpeg"/>';
+      td1.innerHTML = '<img src="/dist/castilloamarillo2.png"/>';
       tr1.appendChild(td1);
       break;
     case 51:
-      td1.innerHTML = '<img src="/dist/castilloamarillo3.jpeg"/>';
+      td1.innerHTML = '<img src="/dist/castilloamarillo3.png"/>';
       tr1.appendChild(td1);
       break;
     case 52:
-      td1.innerHTML = '<img src="/dist/castilloamarillo4.jpeg"/>';
+      td1.innerHTML = '<img src="/dist/castilloamarillo4.png"/>';
       tr1.appendChild(td1);
       break;
     case 53:
-      td1.innerHTML = '<img src="/dist/castilloamarillo5.jpeg"/>';
+      td1.innerHTML = '<img src="/dist/castilloamarillo5.png"/>';
       tr1.appendChild(td1);
       break;
     case 54:
-      td1.innerHTML = '<img src="/dist/castilloamarillo6.jpeg"/>';
+      td1.innerHTML = '<img src="/dist/castilloamarillo6.png"/>';
       tr1.appendChild(td1);
       break;
   }
@@ -255,8 +272,9 @@ function render() {
   tabPlayer2ResC.append(...cardsPlay2RestCastle.map(renderItem));
 }
 
-function startPlay(event) {
+function startPlay(event) {  
   let contNumCards = 55;
+  winner=false;
   cardsPlay1 = [];
   cardsPlay2 = [];
 
@@ -302,18 +320,20 @@ function selectCard1(event) {
   //Si el castillo que estamos construyendo coindice con una de las cartas
   //que sobran del Jugador 2 intercambiamos tres diamantes por una carta castillo
   if (cardsPlay1Diamond.length > 2 && idx !== -1) {
-    let messageDiamond = window.prompt(
+    let messageDiamond = window.alert(
       `Jugador1: Tienes tres diamantes puedes robarle un castillo de color ${colorCastlePlay1Selec  } al Jugador2`,
     );
     //Le robo al jugador1 una del castillo que estoy constuyendo
     stealCastle = cardsPlay2RestCastle.splice(idx, 1);
     cardsPlay1CastleSel.push(...stealCastle);
-    restCardsPlayers = restCardsPlayers.concat = cardsPlay1Diamond.splice(0, 3);
+
+    //restCardsPlayers = restCardsPlayers.concat = cardsPlay1Diamond.splice(0, 3);
+    restCardsPlayers=restCardsPlayers.concat(cardsPlay1Diamond.splice(0, 3));
     cardsPlay1Diamond.splice(0, '');
 
     if (cardsPlay1CastleSel.length === 6) {
       winner = true;
-      let messageWinPlay1 = window.prompt('Jugador1: Has ganado');
+      let messageWinPlay1 = window.alert('Jugador1: Has ganado');
       
     }
   } else {
@@ -333,13 +353,17 @@ function selectCard1(event) {
       }
       case 'witch': {
         debugger;
-        let messageWitch = window.prompt('Jugador1: Has seleccionada una bruja');
+        let messageWitch = window.alert('Jugador1: Has seleccionada una bruja');
         restCardsPlayers = restCardsPlayers.concat(cards.get(cont));
         if (cardsPlay1Fairy.length > 0) {
-          restCardsPlayers = restCardsPlayers.concat = cardsPlay1Fairy.splice(
+         /* restCardsPlayers = restCardsPlayers.concat = cardsPlay1Fairy.splice(
             0,
             1,
-          );
+          );*/
+          restCardsPlayers = restCardsPlayers.concat(cardsPlay1Fairy.splice(
+            0,
+            1,
+          ));
         } else {
           cardWitch1();
         }
@@ -363,7 +387,7 @@ function selectCard1(event) {
             cardsPlay1CastleSel.sort((a, b) => a.position - b.position);
             if (cardsPlay1CastleSel.length === 6) {
               winner = true;
-              let messageWinPlay1 = window.prompt('Jugador1: Has ganado');
+              let messageWinPlay1 = window.alert('Jugador1: Has ganado');
             }
           } else {
             cardsPlay1RestCastle.push(cards.get(cont));
@@ -407,19 +431,20 @@ function selectCard2(event) {
   //que sobran del Jugador 1 intercambiamos tres diamantes por una carta castillo
 
   if (cardsPlay2Diamond.length > 2 && idx !== -1) {
-    let messageDiamond = window.prompt(
+    let messageDiamond = window.alert(
       `Jugador2: Tienes tres diamantes puedes robarle un castillo de color ${colorCastlePlay2Selec} al Jugador1`,
     );
     //Le robo al jugador1 una del castillo que estoy constuyendo
     stealCastle = cardsPlay1RestCastle.splice(idx, 1);
     debugger;
     cardsPlay2CastleSel.push(...stealCastle);
-    restCardsPlayers = restCardsPlayers.concat = cardsPlay2Diamond.splice(0, 3);
+    //restCardsPlayers = restCardsPlayers.concat = cardsPlay2Diamond.splice(0, 3);
+    restCardsPlayers = restCardsPlayers.concat(cardsPlay2Diamond.splice(0, 3));
     cardsPlay2Diamond.splice(0, '');
 
     if (cardsPlay2CastleSel.length === 6) {
       winner = true;
-      let messageWinPlay1 = window.prompt('Jugador2: Has ganado');
+      let messageWinPlay1 = window.alert('Jugador2: Has ganado');
       document.getElementById('butPla1').disabled = true;
     }
   } else {
@@ -441,13 +466,18 @@ function selectCard2(event) {
       }
       case 'witch': {
         //pushCardCont = true;
-        let messageWitch = window.prompt('Jugador2: Has seleccionada una bruja');
+        let messageWitch = window.alert('Jugador2: Has seleccionada una bruja');
+      
         restCardsPlayers = restCardsPlayers.concat(cards.get(cont));
         if (cardsPlay2Fairy.length > 0) {
-          restCardsPlayers = restCardsPlayers.concat = cardsPlay2Fairy.splice(
+          /*restCardsPlayers = restCardsPlayers.concat = cardsPlay2Fairy.splice(
             0,
             1,
-          );
+          );*/
+          restCardsPlayers = restCardsPlayers.concat(cardsPlay2Fairy.splice(
+            0,
+            1,
+          ));
         } else {
           cardWitch();
         }
@@ -470,7 +500,7 @@ function selectCard2(event) {
             cardsPlay2CastleSel.sort((a, b) => a.position - b.position);
             if (cardsPlay2CastleSel.length === 6) {
               winner = true;
-              let messageWinPlay1 = window.prompt('Jugador2: Has ganado');
+              let messageWinPlay1 = window.alert('Jugador2: Has ganado');
               /*document.getElementById('butPla2').disabled = false;
               document.getElementById('butPla1').disabled = false;*/
             }
@@ -521,16 +551,16 @@ function cardWitch() {
   debugger;
   if (cardsTe.length > 2) {
     restCardsPlayers = restCardsPlayers.concat(
-      (restCardsPlayers = cardsTe.splice(0, 3)),
+      (cardsTe.splice(0, 3)),
     );
   } else {
     switch (cardsTe.length) {
       case 2: {
-        restCardsPlayers = restCardsPlayers.concat = cardsTe.splice(0, 2);
+        restCardsPlayers = restCardsPlayers.concat(cardsTe.splice(0, 2));
         break;
       }
       case 1: {
-        restCardsPlayers = restCardsPlayers.concat = cardsTe.splice(0, 1);
+        restCardsPlayers = restCardsPlayers.concat(cardsTe.splice(0, 1));
         break;
       }
     }
@@ -574,11 +604,11 @@ function cardWitch1() {
   } else {
     switch (cardsTe.length) {
       case 2: {
-        restCardsPlayers = restCardsPlayers.concat = cardsTe.splice(0, 2);
+        restCardsPlayers = restCardsPlayers.concat( cardsTe.splice(0, 2));
         break;
       }
       case 1: {
-        restCardsPlayers = restCardsPlayers.concat = cardsTe.splice(0, 1);
+        restCardsPlayers = restCardsPlayers.concat (cardsTe.splice(0, 1));
         break;
       }
     }
@@ -602,32 +632,6 @@ function cardWitch1() {
   );
   cardsPlay1.splice(0, '');
 }
-
-/*function cardDiamond(stealCast) {
-  debugger;
-  if (cardsPlay2Diamond.length > 2) {
-    let messageDiamond = window.prompt(
-      `Jugador2: Tienes tres diamantes puedes robarle un castillo de color ${colorCastlePlay2Selec} al Jugador1, el Jugador
-      1 tiene un castillo de color ${colorCastlePlay2Selec}`,
-    );
-    //Le robo al jugador1 una del castillo que estoy constuyendo
-    cardsPlay2CastleSel.push(stealCast);
-    restCardsPlayers = restCardsPlayers.concat = cardsPlay2Diamond.splice(0, 1);
-  }
-}*/
-
-/*function cardDiamond1(stealCast) {
-  debugger;
-  if (cardsPlay1Diamond.length > 2) {
-    let messageDiamond = window.prompt(
-      `Jugador1: Tienes tres diamantes puedes robarle un castillo de color ${colorCastlePlay1Selec} al Jugador1, el Jugador
-      1 tiene un castillo de color ${colorCastlePlay1Selec}`,
-    );
-    //Le robo al jugador1 una del castillo que estoy constuyendo
-    cardsPlay1CastleSel.push(stealCast);
-    restCardsPlayers = restCardsPlayers.concat = cardsPlay1Diamond.splice(0, 1);
-  }
-}*/
 
 document.addEventListener('DOMContentLoaded', function () {
   tabPlayer1CastleSelec = document.getElementById('table1');
