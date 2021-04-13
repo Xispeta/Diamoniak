@@ -41,8 +41,7 @@ class Castle extends Card {
     super(name, valueCard);
     this.imageCard = imageCard;
     this.color = color;
-    this.position = position;
-    //this.completed = completed;
+    this.position = position;   
   }
 }
 
@@ -261,7 +260,7 @@ function render() {
   tabPlayer2Diamond.append(...cardsPlay2Diamond.map(renderItem));
 
   tabPlayer1Fairy.append(...cardsPlay1Fairy.map(renderItem));
-  tabPlayer2Fairy.append(...cardsPlay2Fairy.map(renderItem));
+  tabPlayer2Fairy.append(...cardsPlay2Fairy.map(renderItem));  
 
   tabPlayer1CastleSelec.append(...cardsPlay1CastleSel.map(renderItem));
   tabPlayer2CastleSelec.append(...cardsPlay2CastleSel.map(renderItem));
@@ -272,6 +271,7 @@ function render() {
 
 function startPlay(event) {
   let contNumCards = 55;
+  cont=0;
   winner = false;
   cardsPlay1 = [];
   cardsPlay2 = [];
@@ -299,6 +299,7 @@ function startPlay(event) {
   event.preventDefault();
 
   document.getElementById('butPla1').disabled = false;
+  document.getElementById('butPla2').disabled = true;
 
   cards = shufflingCards(contNumCards);
   render();
@@ -353,6 +354,7 @@ function selectCard1(event) {
         let messageWitch = window.alert('Jugador1: Has seleccionada una bruja');
         restCardsPlayers = restCardsPlayers.concat(cards.get(cont));
         if (cardsPlay1Fairy.length > 0) {
+          //restCardsPlayers.push(...cardsPlay1Fairy.splice(0,1));
           restCardsPlayers = restCardsPlayers.concat(
             cardsPlay1Fairy.splice(0, 1),
           );
@@ -443,6 +445,11 @@ function selectCard2(event) {
       cont = 0;
       //randomCards(restCardsPlayers);
     }
+    debugger;
+    if(cards.get(cont).name==='undefined')
+    {
+      debugger;
+    }
     switch (cards.get(cont).name) {
       case 'diamond': {
         cardsPlay2Diamond.push(cards.get(cont));
@@ -462,6 +469,7 @@ function selectCard2(event) {
             0,
             1,
           );*/
+          /*restCardsPlayers.push(...cardsPlay2Fairy.splice(0, 1));*/
           restCardsPlayers = restCardsPlayers.concat(
             cardsPlay2Fairy.splice(0, 1),
           );
@@ -488,8 +496,6 @@ function selectCard2(event) {
             if (cardsPlay2CastleSel.length === 6) {
               winner = true;
               let messageWinPlay1 = window.alert('Jugador2: Has ganado');
-              /*document.getElementById('butPla2').disabled = false;
-              document.getElementById('butPla1').disabled = false;*/
             }
           } else {
             cardsPlay2RestCastle.push(cards.get(cont));
@@ -547,7 +553,7 @@ function cardWitch() {
     (element) =>
       element instanceof Castle && element.color === colorCastlePlay2Selec,
   );
-  cardsPlay2CastleSel.sort((a,b)=>a.position-b.position);
+  cardsPlay2CastleSel.sort((a, b) => a.position - b.position);
   cardsPlay2RestCastle = cardsTe.filter(
     (element) =>
       element instanceof Castle && element.color !== colorCastlePlay2Selec,
@@ -601,7 +607,7 @@ function cardWitch1() {
     (element) =>
       element instanceof Castle && element.color !== colorCastlePlay1Selec,
   );
-  
+
   cardsPlay1 = new Array(
     ...cardsPlay2Fairy,
     ...cardsPlay2RestCastle,
