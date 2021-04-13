@@ -42,7 +42,7 @@ class Castle extends Card {
     this.imageCard = imageCard;
     this.color = color;
     this.position = position;
-    this.completed = completed;
+    //this.completed = completed;
   }
 }
 
@@ -99,9 +99,7 @@ let loop = false;
 document.getElementById('butPla1').disabled = true;
 document.getElementById('butPla2').disabled = true;
 
-let contrucCastle = false;
-
-function renderItem(cardsP, index) {
+function renderItem(cardsP) {
   const tr1 = document.createElement('tr');
   const td1 = document.createElement('td');
 
@@ -109,7 +107,7 @@ function renderItem(cardsP, index) {
     case 0:
     case 1:
     case 2:
-      td1.innerHTML = '<img src="/dist/Hada.png"/>';
+      td1.innerHTML = cardsP.imageCard;
       tr1.appendChild(td1);
       break;
     case 3:
@@ -143,103 +141,103 @@ function renderItem(cardsP, index) {
     case 28:
     case 29:
     case 30:
-      td1.innerHTML = '<img src="/dist/diamante.png"/>';
+      td1.innerHTML = cardsP.imageCard;
       tr1.appendChild(td1);
       break;
     case 31:
-      td1.innerHTML = '<img src="/dist/castillorosa1.png"/>';
+      td1.innerHTML = cardsP.imageCard;
       tr1.appendChild(td1);
       break;
     case 32:
-      td1.innerHTML = '<img src="/dist/castillorosa2.png"/>';
+      td1.innerHTML = cardsP.imageCard;
       tr1.appendChild(td1);
       break;
     case 33:
-      td1.innerHTML = '<img src="/dist/castillorosa3.png"/>';
+      td1.innerHTML = cardsP.imageCard;
       tr1.appendChild(td1);
       break;
     case 34:
-      td1.innerHTML = '<img src="/dist/castillorosa4.png"/>';
+      td1.innerHTML = cardsP.imageCard;
       tr1.appendChild(td1);
       break;
     case 35:
-      td1.innerHTML = '<img src="/dist/castillorosa5.png"/>';
+      td1.innerHTML = cardsP.imageCard;
       tr1.appendChild(td1);
       break;
     case 36:
-      td1.innerHTML = '<img src="/dist/castillorosa6.png"/>';
+      td1.innerHTML = cardsP.imageCard;
       tr1.appendChild(td1);
       break;
     case 37:
-      td1.innerHTML = '<img src="/dist/castilloazul1.png"/>';
+      td1.innerHTML = cardsP.imageCard;
       tr1.appendChild(td1);
       break;
     case 38:
-      td1.innerHTML = '<img src="/dist/castilloazul2.png"/>';
+      td1.innerHTML = cardsP.imageCard;
       tr1.appendChild(td1);
       break;
     case 39:
-      td1.innerHTML = '<img src="/dist/castilloazul3.png"/>';
+      td1.innerHTML = cardsP.imageCard;
       tr1.appendChild(td1);
       break;
     case 40:
-      td1.innerHTML = '<img src="/dist/castilloazul4.png"/>';
+      td1.innerHTML = cardsP.imageCard;
       tr1.appendChild(td1);
       break;
     case 41:
-      td1.innerHTML = '<img src="/dist/castilloazul5.png"/>';
+      td1.innerHTML = cardsP.imageCard;
       tr1.appendChild(td1);
       break;
     case 42:
-      td1.innerHTML = '<img src="/dist/castilloazul6.png"/>';
+      td1.innerHTML = cardsP.imageCard;
       tr1.appendChild(td1);
       break;
     case 43:
-      td1.innerHTML = '<img src="/dist/castilloverde1.png"/>';
+      td1.innerHTML = cardsP.imageCard;
       tr1.appendChild(td1);
       break;
     case 44:
-      td1.innerHTML = '<img src="/dist/castilloverde2.png"/>';
+      td1.innerHTML = cardsP.imageCard;
       tr1.appendChild(td1);
       break;
     case 45:
-      td1.innerHTML = '<img src="/dist/castilloverde3.png"/>';
+      td1.innerHTML = cardsP.imageCard;
       tr1.appendChild(td1);
       break;
     case 46:
-      td1.innerHTML = '<img src="/dist/castilloverde4.png"/>';
+      td1.innerHTML = cardsP.imageCard;
       tr1.appendChild(td1);
       break;
     case 47:
-      td1.innerHTML = '<img src="/dist/castilloverde5.png"/>';
+      td1.innerHTML = cardsP.imageCard;
       tr1.appendChild(td1);
       break;
     case 48:
-      td1.innerHTML = '<img src="/dist/castilloverde6.png"/>';
+      td1.innerHTML = cardsP.imageCard;
       tr1.appendChild(td1);
       break;
     case 49:
-      td1.innerHTML = '<img src="/dist/castilloamarillo1.png"/>';
+      td1.innerHTML = cardsP.imageCard;
       tr1.appendChild(td1);
       break;
     case 50:
-      td1.innerHTML = '<img src="/dist/castilloamarillo2.png"/>';
+      td1.innerHTML = cardsP.imageCard;
       tr1.appendChild(td1);
       break;
     case 51:
-      td1.innerHTML = '<img src="/dist/castilloamarillo3.png"/>';
+      td1.innerHTML = cardsP.imageCard;
       tr1.appendChild(td1);
       break;
     case 52:
-      td1.innerHTML = '<img src="/dist/castilloamarillo4.png"/>';
+      td1.innerHTML = cardsP.imageCard;
       tr1.appendChild(td1);
       break;
     case 53:
-      td1.innerHTML = '<img src="/dist/castilloamarillo5.png"/>';
+      td1.innerHTML = cardsP.imageCard;
       tr1.appendChild(td1);
       break;
     case 54:
-      td1.innerHTML = '<img src="/dist/castilloamarillo6.png"/>';
+      td1.innerHTML = cardsP.imageCard;
       tr1.appendChild(td1);
       break;
   }
@@ -272,9 +270,9 @@ function render() {
   tabPlayer2ResC.append(...cardsPlay2RestCastle.map(renderItem));
 }
 
-function startPlay(event) {  
+function startPlay(event) {
   let contNumCards = 55;
-  winner=false;
+  winner = false;
   cardsPlay1 = [];
   cardsPlay2 = [];
 
@@ -321,20 +319,19 @@ function selectCard1(event) {
   //que sobran del Jugador 2 intercambiamos tres diamantes por una carta castillo
   if (cardsPlay1Diamond.length > 2 && idx !== -1) {
     let messageDiamond = window.alert(
-      `Jugador1: Tienes tres diamantes puedes robarle un castillo de color ${colorCastlePlay1Selec  } al Jugador2`,
+      `Jugador1: Tienes tres diamantes puedes robarle un castillo de color ${colorCastlePlay1Selec} al Jugador2`,
     );
     //Le robo al jugador1 una del castillo que estoy constuyendo
     stealCastle = cardsPlay2RestCastle.splice(idx, 1);
     cardsPlay1CastleSel.push(...stealCastle);
+    cardsPlay1CastleSel.sort((a, b) => a.position - b.position);
 
-    //restCardsPlayers = restCardsPlayers.concat = cardsPlay1Diamond.splice(0, 3);
-    restCardsPlayers=restCardsPlayers.concat(cardsPlay1Diamond.splice(0, 3));
+    restCardsPlayers = restCardsPlayers.concat(cardsPlay1Diamond.splice(0, 3));
     cardsPlay1Diamond.splice(0, '');
 
     if (cardsPlay1CastleSel.length === 6) {
       winner = true;
       let messageWinPlay1 = window.alert('Jugador1: Has ganado');
-      
     }
   } else {
     if (cards.size === 0) {
@@ -356,14 +353,9 @@ function selectCard1(event) {
         let messageWitch = window.alert('Jugador1: Has seleccionada una bruja');
         restCardsPlayers = restCardsPlayers.concat(cards.get(cont));
         if (cardsPlay1Fairy.length > 0) {
-         /* restCardsPlayers = restCardsPlayers.concat = cardsPlay1Fairy.splice(
-            0,
-            1,
-          );*/
-          restCardsPlayers = restCardsPlayers.concat(cardsPlay1Fairy.splice(
-            0,
-            1,
-          ));
+          restCardsPlayers = restCardsPlayers.concat(
+            cardsPlay1Fairy.splice(0, 1),
+          );
         } else {
           cardWitch1();
         }
@@ -378,10 +370,6 @@ function selectCard1(event) {
             colorCastlePlay1Selec = cards.get(cont).color;
             cardsPlay1CastleSel.push(cards.get(cont));
             cardsPlay1CastleSel.sort((a, b) => a.position - b.position);
-            console.log(
-              'color del Castillo seleccionada jugador 1 ' +
-                colorCastlePlay1Selec,
-            );
           } else if (cards.get(cont).color === colorCastlePlay1Selec) {
             cardsPlay1CastleSel.push(cards.get(cont));
             cardsPlay1CastleSel.sort((a, b) => a.position - b.position);
@@ -406,12 +394,12 @@ function selectCard1(event) {
     cont++;
   }
   render();
-  if(winner){
+  if (winner) {
     document.getElementById('butPla2').disabled = true;
     document.getElementById('butPla1').disabled = true;
-  }else{
-  document.getElementById('butPla1').disabled = true;
-  document.getElementById('butPla2').disabled = false;
+  } else {
+    document.getElementById('butPla1').disabled = true;
+    document.getElementById('butPla2').disabled = false;
   }
 }
 
@@ -438,6 +426,7 @@ function selectCard2(event) {
     stealCastle = cardsPlay1RestCastle.splice(idx, 1);
     debugger;
     cardsPlay2CastleSel.push(...stealCastle);
+    cardsPlay2CastleSel.sort((a, b) => a.position - b.position);
     //restCardsPlayers = restCardsPlayers.concat = cardsPlay2Diamond.splice(0, 3);
     restCardsPlayers = restCardsPlayers.concat(cardsPlay2Diamond.splice(0, 3));
     cardsPlay2Diamond.splice(0, '');
@@ -467,17 +456,15 @@ function selectCard2(event) {
       case 'witch': {
         //pushCardCont = true;
         let messageWitch = window.alert('Jugador2: Has seleccionada una bruja');
-      
         restCardsPlayers = restCardsPlayers.concat(cards.get(cont));
         if (cardsPlay2Fairy.length > 0) {
           /*restCardsPlayers = restCardsPlayers.concat = cardsPlay2Fairy.splice(
             0,
             1,
           );*/
-          restCardsPlayers = restCardsPlayers.concat(cardsPlay2Fairy.splice(
-            0,
-            1,
-          ));
+          restCardsPlayers = restCardsPlayers.concat(
+            cardsPlay2Fairy.splice(0, 1),
+          );
         } else {
           cardWitch();
         }
@@ -520,27 +507,18 @@ function selectCard2(event) {
     cont++;
   }
   render();
-  if(winner){
+  if (winner) {
     document.getElementById('butPla1').disabled = true;
     document.getElementById('butPla2').disabled = true;
-  }else{
-  document.getElementById('butPla1').disabled = false;
-  document.getElementById('butPla2').disabled = true;
-  }
-
-  //Activación desactivación de los Botones
-  /*if (!winner) {
-    document.getElementById('butPla2').disabled = true;
-    document.getElementById('butPla1').disabled = false;
   } else {
-    document.getElementById('butPla2').disabled = false;
     document.getElementById('butPla1').disabled = false;
-  }*/
+    document.getElementById('butPla2').disabled = true;
+  }
 }
 function cardWitch() {
   let cardsTe = new Array();
   console.log('es una bruja ' + cards.get(cont).name);
-  
+
   console.log('jugardor 2 has encontrado una bruja');
   cardsTe = new Array(
     ...cardsPlay2RestCastle,
@@ -550,9 +528,7 @@ function cardWitch() {
 
   debugger;
   if (cardsTe.length > 2) {
-    restCardsPlayers = restCardsPlayers.concat(
-      (cardsTe.splice(0, 3)),
-    );
+    restCardsPlayers = restCardsPlayers.concat(cardsTe.splice(0, 3));
   } else {
     switch (cardsTe.length) {
       case 2: {
@@ -571,6 +547,7 @@ function cardWitch() {
     (element) =>
       element instanceof Castle && element.color === colorCastlePlay2Selec,
   );
+  cardsPlay2CastleSel.sort((a,b)=>a.position-b.position);
   cardsPlay2RestCastle = cardsTe.filter(
     (element) =>
       element instanceof Castle && element.color !== colorCastlePlay2Selec,
@@ -588,7 +565,7 @@ function cardWitch() {
 function cardWitch1() {
   let cardsTe = new Array();
   console.log('es una bruja ' + cards.get(cont).name);
-  
+
   console.log('jugardor 1 has encontrado una bruja');
   cardsTe = new Array(
     ...cardsPlay1RestCastle,
@@ -604,11 +581,11 @@ function cardWitch1() {
   } else {
     switch (cardsTe.length) {
       case 2: {
-        restCardsPlayers = restCardsPlayers.concat( cardsTe.splice(0, 2));
+        restCardsPlayers = restCardsPlayers.concat(cardsTe.splice(0, 2));
         break;
       }
       case 1: {
-        restCardsPlayers = restCardsPlayers.concat (cardsTe.splice(0, 1));
+        restCardsPlayers = restCardsPlayers.concat(cardsTe.splice(0, 1));
         break;
       }
     }
@@ -619,11 +596,12 @@ function cardWitch1() {
     (element) =>
       element instanceof Castle && element.color === colorCastlePlay1Selec,
   );
+  cardsPlay1CastleSel.sort((a, b) => a.position - b.position);
   cardsPlay1RestCastle = cardsTe.filter(
     (element) =>
       element instanceof Castle && element.color !== colorCastlePlay1Selec,
   );
-
+  
   cardsPlay1 = new Array(
     ...cardsPlay2Fairy,
     ...cardsPlay2RestCastle,
@@ -679,7 +657,7 @@ function addCards() {
   let arrayCard = new Array();
   let j = 0;
   for (let i = 0; i < 3; i++) {
-    arrayCard[j] = new Fairy('fairy', j, `imageFairy${j}`);
+    arrayCard[j] = new Fairy('fairy', j, '<img src="/dist/Hada.png"/>');
     j++;
   }
 
@@ -688,17 +666,16 @@ function addCards() {
     j++;
   }
   for (let i = 0; i < 20; i++) {
-    arrayCard[j] = new Diamond('diamond', j, `imageDiamond`);
+    arrayCard[j] = new Diamond('diamond', j, '<img src="/dist/diamante.png"/>');
     j++;
   }
   for (let i = 0; i < 6; i++) {
     arrayCard[j] = new Castle(
       'castle',
       j,
-      `imageCastleP${i}`,
+      `<img src="/dist/castillorosa${i + 1}.png"/>`,
       'pink',
-      i,
-      false,
+      i + 1,
     );
     j++;
   }
@@ -706,10 +683,9 @@ function addCards() {
     arrayCard[j] = new Castle(
       'castle',
       j,
-      `imageCastleB${i}`,
+      `<img src="/dist/castilloazul${i + 1}.png"/>`,
       'blue',
-      i,
-      false,
+      i + 1,
     );
     j++;
   }
@@ -717,10 +693,9 @@ function addCards() {
     arrayCard[j] = new Castle(
       'castle',
       j,
-      `imageCastleG${i}`,
+      `<img src="/dist/castilloverde${i + 1}.png"/>`,
       'green',
-      i,
-      false,
+      i + 1,
     );
     j++;
   }
@@ -728,18 +703,16 @@ function addCards() {
     arrayCard[j] = new Castle(
       'castle',
       j,
-      `imageCastleY${i}`,
+      `<img src="/dist/castilloamarillo${i + 1}.png"/>`,
       'yellow',
-      i,
-      false,
+      i + 1,
     );
     j++;
   }
   return arrayCard;
 }
 
-//Empieza el Juego y barajamos
-
+//Empieza el Juego y mezcalmos las cartas
 function shufflingCards(contNumCards) {
   debugger;
   let arrCard = new Array();
