@@ -41,7 +41,7 @@ class Castle extends Card {
     super(name, valueCard);
     this.imageCard = imageCard;
     this.color = color;
-    this.position = position;   
+    this.position = position;
   }
 }
 
@@ -60,7 +60,10 @@ let tabPlayer1Fairy;
 let tabPlayer2Fairy;
 
 let tabPlayer1CastleSelec;
+let tabPlayer1CastleSelec2;
+
 let tabPlayer2CastleSelec;
+let tabPlayer2CastleSelec2;
 
 let tabPlayer1ResC;
 let tabPlayer2ResC;
@@ -251,7 +254,10 @@ function render() {
   tabPlayer2Fairy.textContent = '';
 
   tabPlayer1CastleSelec.textContent = '';
+  tabPlayer1CastleSelec2.textContent='';
+
   tabPlayer2CastleSelec.textContent = '';
+  tabPlayer2CastleSelec2.textContent='';
 
   tabPlayer1ResC.textContent = '';
   tabPlayer2ResC.textContent = '';
@@ -260,10 +266,13 @@ function render() {
   tabPlayer2Diamond.append(...cardsPlay2Diamond.map(renderItem));
 
   tabPlayer1Fairy.append(...cardsPlay1Fairy.map(renderItem));
-  tabPlayer2Fairy.append(...cardsPlay2Fairy.map(renderItem));  
+  tabPlayer2Fairy.append(...cardsPlay2Fairy.map(renderItem));
 
-  tabPlayer1CastleSelec.append(...cardsPlay1CastleSel.map(renderItem));
-  tabPlayer2CastleSelec.append(...cardsPlay2CastleSel.map(renderItem));
+  tabPlayer1CastleSelec.append(...cardsPlay1CastleSel.filter((cardsPlay1CastleSel)=>cardsPlay1CastleSel.position<4).map(renderItem));
+  tabPlayer2CastleSelec.append(...cardsPlay2CastleSel.filter((cardsPlay2CastleSel)=>cardsPlay2CastleSel.position<4).map(renderItem));
+
+  tabPlayer1CastleSelec2.append(...cardsPlay1CastleSel.filter((cardsPlay1CastleSel)=>cardsPlay1CastleSel.position>3).map(renderItem));
+  tabPlayer2CastleSelec2.append(...cardsPlay2CastleSel.filter((cardsPlay2CastleSel)=>cardsPlay2CastleSel.position>3).map(renderItem));
 
   tabPlayer1ResC.append(...cardsPlay1RestCastle.map(renderItem));
   tabPlayer2ResC.append(...cardsPlay2RestCastle.map(renderItem));
@@ -271,7 +280,7 @@ function render() {
 
 function startPlay(event) {
   let contNumCards = 55;
-  cont=0;
+  cont = 0;
   winner = false;
   cardsPlay1 = [];
   cardsPlay2 = [];
@@ -336,7 +345,7 @@ function selectCard1(event) {
     }
   } else {
     if (cards.size === 0) {
-      debugger;
+      
       cards = shufflingCards(restCardsPlayers.length);
       cont = 0;
     }
@@ -350,14 +359,14 @@ function selectCard1(event) {
         break;
       }
       case 'witch': {
-        debugger;
+        
         let messageWitch = window.alert('Jugador1: Has seleccionada una bruja');
         restCardsPlayers = restCardsPlayers.concat(cards.get(cont));
         if (cardsPlay1Fairy.length > 0) {
-          //restCardsPlayers.push(...cardsPlay1Fairy.splice(0,1));
-          restCardsPlayers = restCardsPlayers.concat(
+          restCardsPlayers.push(...cardsPlay1Fairy.splice(0, 1));
+          /*restCardsPlayers = restCardsPlayers.concat(
             cardsPlay1Fairy.splice(0, 1),
-          );
+          );*/
         } else {
           cardWitch1();
         }
@@ -426,7 +435,7 @@ function selectCard2(event) {
     );
     //Le robo al jugador1 una del castillo que estoy constuyendo
     stealCastle = cardsPlay1RestCastle.splice(idx, 1);
-    debugger;
+    
     cardsPlay2CastleSel.push(...stealCastle);
     cardsPlay2CastleSel.sort((a, b) => a.position - b.position);
     //restCardsPlayers = restCardsPlayers.concat = cardsPlay2Diamond.splice(0, 3);
@@ -440,15 +449,14 @@ function selectCard2(event) {
     }
   } else {
     if (cards.size === 0) {
-      debugger;
+      
       cards = shufflingCards(restCardsPlayers.length);
       cont = 0;
       //randomCards(restCardsPlayers);
     }
-    debugger;
-    if(cards.get(cont).name==='undefined')
-    {
-      debugger;
+    
+    if (cards.get(cont).name === 'undefined') {
+      
     }
     switch (cards.get(cont).name) {
       case 'diamond': {
@@ -456,7 +464,7 @@ function selectCard2(event) {
         break;
       }
       case 'fairy': {
-        debugger;
+        
         cardsPlay2Fairy.push(cards.get(cont));
         break;
       }
@@ -469,10 +477,10 @@ function selectCard2(event) {
             0,
             1,
           );*/
-          /*restCardsPlayers.push(...cardsPlay2Fairy.splice(0, 1));*/
-          restCardsPlayers = restCardsPlayers.concat(
+          restCardsPlayers.push(...cardsPlay2Fairy.splice(0, 1));
+          /*restCardsPlayers = restCardsPlayers.concat(
             cardsPlay2Fairy.splice(0, 1),
-          );
+          );*/
         } else {
           cardWitch();
         }
@@ -532,7 +540,7 @@ function cardWitch() {
     ...cardsPlay2CastleSel,
   );
 
-  debugger;
+  
   if (cardsTe.length > 2) {
     restCardsPlayers = restCardsPlayers.concat(cardsTe.splice(0, 3));
   } else {
@@ -547,7 +555,7 @@ function cardWitch() {
       }
     }
   }
-  debugger;
+  
   cardsPlay2Diamond = cardsTe.filter((element) => element.name === 'diamond');
   cardsPlay2CastleSel = cardsTe.filter(
     (element) =>
@@ -579,7 +587,7 @@ function cardWitch1() {
     ...cardsPlay1CastleSel,
   );
 
-  debugger;
+  
   if (cardsTe.length > 2) {
     restCardsPlayers = restCardsPlayers.concat(
       (restCardsPlayers = cardsTe.splice(0, 3)),
@@ -596,7 +604,7 @@ function cardWitch1() {
       }
     }
   }
-  debugger;
+  
   cardsPlay1Diamond = cardsTe.filter((element) => element.name === 'diamond');
   cardsPlay1CastleSel = cardsTe.filter(
     (element) =>
@@ -619,11 +627,13 @@ function cardWitch1() {
 
 document.addEventListener('DOMContentLoaded', function () {
   tabPlayer1CastleSelec = document.getElementById('table1');
+  tabPlayer1CastleSelec2=document.getElementById('table1_2');
   tabPlayer1Diamond = document.getElementById('table2');
   tabPlayer1Fairy = document.getElementById('table3');
   tabPlayer1ResC = document.getElementById('table4');
 
   tabPlayer2CastleSelec = document.getElementById('table5');
+  tabPlayer2CastleSelec2=document.getElementById('table5_2');
   tabPlayer2Diamond = document.getElementById('table6');
   tabPlayer2Fairy = document.getElementById('table7');
   tabPlayer2ResC = document.getElementById('table8');
@@ -639,7 +649,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // Función que devuelve la carta seleccionada al azar - total son 55 cartas
 // se cambiara el valor max dependiendo del número de cartas restantes
 function randomCards(contC) {
-  debugger;
+  
   let j = 0;
   let min = 0;
   let orderCard = new Array();
@@ -720,13 +730,13 @@ function addCards() {
 
 //Empieza el Juego y mezcalmos las cartas
 function shufflingCards(contNumCards) {
-  debugger;
+  
   let arrCard = new Array();
   let shufflingC = new Map();
   let ranC = randomCards(contNumCards);
   //Resto de rondas
   if (contNumCards < 55) {
-    debugger;
+    
     arrCard = restCardsPlayers;
     //Primera ronda
   } else {
