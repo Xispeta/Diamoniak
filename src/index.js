@@ -377,7 +377,7 @@ function selectCard2(event) {
   }
 }
 
-function cardWitch() {
+function cardWitch2() {
   let cardsTe = new Array();
 
   cardsTe = new Array(
