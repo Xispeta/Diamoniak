@@ -1,8 +1,3 @@
-/**
- * This file is just a silly example to show everything working in the browser.
- * When you're ready to start on your site, clear the file. Happy hacking!
- **/
-
 //Variable global que contiene todas las cartas en la primera ronda
 //y las restantes de cada ronda
 'use strict';
@@ -44,7 +39,7 @@ class Castle extends Card {
     this.position = position;
   }
 }
-
+//Esta parte está sin implementar
 class Player {
   constructor(name, age, winner) {
     this.name = name;
@@ -67,6 +62,8 @@ let tabPlayer2CastleSelec2;
 
 let tabPlayer1ResC;
 let tabPlayer2ResC;
+
+let dialogS;
 
 let cards = new Map();
 
@@ -105,144 +102,9 @@ function renderItem(cardsP) {
   const tr1 = document.createElement('tr');
   const td1 = document.createElement('td');
 
-  switch (cardsP.valueCard) {
-    case 0:
-    case 1:
-    case 2:
-      td1.innerHTML = cardsP.imageCard;
-      tr1.appendChild(td1);
-      break;
-    case 3:
-    case 4:
-    case 5:
-    case 6:
-    case 7:
-    case 8:
-    case 9:
-    case 10:
-      td1.innerHTML = '<img src="/dist/bruja.png"/>';
-      tr1.appendChild(td1);
-      break;
-    case 11:
-    case 12:
-    case 13:
-    case 14:
-    case 15:
-    case 16:
-    case 17:
-    case 18:
-    case 19:
-    case 20:
-    case 21:
-    case 22:
-    case 23:
-    case 24:
-    case 25:
-    case 26:
-    case 27:
-    case 28:
-    case 29:
-    case 30:
-      td1.innerHTML = cardsP.imageCard;
-      tr1.appendChild(td1);
-      break;
-    case 31:
-      td1.innerHTML = cardsP.imageCard;
-      tr1.appendChild(td1);
-      break;
-    case 32:
-      td1.innerHTML = cardsP.imageCard;
-      tr1.appendChild(td1);
-      break;
-    case 33:
-      td1.innerHTML = cardsP.imageCard;
-      tr1.appendChild(td1);
-      break;
-    case 34:
-      td1.innerHTML = cardsP.imageCard;
-      tr1.appendChild(td1);
-      break;
-    case 35:
-      td1.innerHTML = cardsP.imageCard;
-      tr1.appendChild(td1);
-      break;
-    case 36:
-      td1.innerHTML = cardsP.imageCard;
-      tr1.appendChild(td1);
-      break;
-    case 37:
-      td1.innerHTML = cardsP.imageCard;
-      tr1.appendChild(td1);
-      break;
-    case 38:
-      td1.innerHTML = cardsP.imageCard;
-      tr1.appendChild(td1);
-      break;
-    case 39:
-      td1.innerHTML = cardsP.imageCard;
-      tr1.appendChild(td1);
-      break;
-    case 40:
-      td1.innerHTML = cardsP.imageCard;
-      tr1.appendChild(td1);
-      break;
-    case 41:
-      td1.innerHTML = cardsP.imageCard;
-      tr1.appendChild(td1);
-      break;
-    case 42:
-      td1.innerHTML = cardsP.imageCard;
-      tr1.appendChild(td1);
-      break;
-    case 43:
-      td1.innerHTML = cardsP.imageCard;
-      tr1.appendChild(td1);
-      break;
-    case 44:
-      td1.innerHTML = cardsP.imageCard;
-      tr1.appendChild(td1);
-      break;
-    case 45:
-      td1.innerHTML = cardsP.imageCard;
-      tr1.appendChild(td1);
-      break;
-    case 46:
-      td1.innerHTML = cardsP.imageCard;
-      tr1.appendChild(td1);
-      break;
-    case 47:
-      td1.innerHTML = cardsP.imageCard;
-      tr1.appendChild(td1);
-      break;
-    case 48:
-      td1.innerHTML = cardsP.imageCard;
-      tr1.appendChild(td1);
-      break;
-    case 49:
-      td1.innerHTML = cardsP.imageCard;
-      tr1.appendChild(td1);
-      break;
-    case 50:
-      td1.innerHTML = cardsP.imageCard;
-      tr1.appendChild(td1);
-      break;
-    case 51:
-      td1.innerHTML = cardsP.imageCard;
-      tr1.appendChild(td1);
-      break;
-    case 52:
-      td1.innerHTML = cardsP.imageCard;
-      tr1.appendChild(td1);
-      break;
-    case 53:
-      td1.innerHTML = cardsP.imageCard;
-      tr1.appendChild(td1);
-      break;
-    case 54:
-      td1.innerHTML = cardsP.imageCard;
-      tr1.appendChild(td1);
-      break;
-  }
+  td1.innerHTML = cardsP.imageCard;
+  tr1.appendChild(td1);
+
   return tr1;
 }
 
@@ -254,10 +116,10 @@ function render() {
   tabPlayer2Fairy.textContent = '';
 
   tabPlayer1CastleSelec.textContent = '';
-  tabPlayer1CastleSelec2.textContent='';
+  tabPlayer1CastleSelec2.textContent = '';
 
   tabPlayer2CastleSelec.textContent = '';
-  tabPlayer2CastleSelec2.textContent='';
+  tabPlayer2CastleSelec2.textContent = '';
 
   tabPlayer1ResC.textContent = '';
   tabPlayer2ResC.textContent = '';
@@ -268,11 +130,27 @@ function render() {
   tabPlayer1Fairy.append(...cardsPlay1Fairy.map(renderItem));
   tabPlayer2Fairy.append(...cardsPlay2Fairy.map(renderItem));
 
-  tabPlayer1CastleSelec.append(...cardsPlay1CastleSel.filter((cardsPlay1CastleSel)=>cardsPlay1CastleSel.position<4).map(renderItem));
-  tabPlayer2CastleSelec.append(...cardsPlay2CastleSel.filter((cardsPlay2CastleSel)=>cardsPlay2CastleSel.position<4).map(renderItem));
+  tabPlayer1CastleSelec.append(
+    ...cardsPlay1CastleSel
+      .filter((cardsPlay1CastleSel) => cardsPlay1CastleSel.position < 4)
+      .map(renderItem),
+  );
+  tabPlayer2CastleSelec.append(
+    ...cardsPlay2CastleSel
+      .filter((cardsPlay2CastleSel) => cardsPlay2CastleSel.position < 4)
+      .map(renderItem),
+  );
 
-  tabPlayer1CastleSelec2.append(...cardsPlay1CastleSel.filter((cardsPlay1CastleSel)=>cardsPlay1CastleSel.position>3).map(renderItem));
-  tabPlayer2CastleSelec2.append(...cardsPlay2CastleSel.filter((cardsPlay2CastleSel)=>cardsPlay2CastleSel.position>3).map(renderItem));
+  tabPlayer1CastleSelec2.append(
+    ...cardsPlay1CastleSel
+      .filter((cardsPlay1CastleSel) => cardsPlay1CastleSel.position > 3)
+      .map(renderItem),
+  );
+  tabPlayer2CastleSelec2.append(
+    ...cardsPlay2CastleSel
+      .filter((cardsPlay2CastleSel) => cardsPlay2CastleSel.position > 3)
+      .map(renderItem),
+  );
 
   tabPlayer1ResC.append(...cardsPlay1RestCastle.map(renderItem));
   tabPlayer2ResC.append(...cardsPlay2RestCastle.map(renderItem));
@@ -345,7 +223,6 @@ function selectCard1(event) {
     }
   } else {
     if (cards.size === 0) {
-      
       cards = shufflingCards(restCardsPlayers.length);
       cont = 0;
     }
@@ -359,22 +236,16 @@ function selectCard1(event) {
         break;
       }
       case 'witch': {
-        
-        let messageWitch = window.alert('Jugador1: Has seleccionada una bruja');
+        let messageWitch = window.alert('Jugador1: Has seleccionado una bruja');
         restCardsPlayers = restCardsPlayers.concat(cards.get(cont));
         if (cardsPlay1Fairy.length > 0) {
           restCardsPlayers.push(...cardsPlay1Fairy.splice(0, 1));
-          /*restCardsPlayers = restCardsPlayers.concat(
-            cardsPlay1Fairy.splice(0, 1),
-          );*/
         } else {
           cardWitch1();
         }
         break;
       }
       case 'castle': {
-        console.log('entro en switch castle Jugador2');
-
         if (colorCastlePlay2Selec !== cards.get(cont).color) {
           if (!castSelectPlay1) {
             castSelectPlay1 = true;
@@ -390,17 +261,14 @@ function selectCard1(event) {
             }
           } else {
             cardsPlay1RestCastle.push(cards.get(cont));
-            cardsPlay1RestCastle.sort((a, b) => a.position - b.position);
           }
         } else {
           cardsPlay1RestCastle.push(cards.get(cont));
-          cardsPlay1RestCastle.sort((a, b) => a.position - b.position);
         }
         cardsPlay1.push(cards.get(cont));
         break;
       }
     }
-
     cards.delete(cont);
     cont++;
   }
@@ -435,10 +303,9 @@ function selectCard2(event) {
     );
     //Le robo al jugador1 una del castillo que estoy constuyendo
     stealCastle = cardsPlay1RestCastle.splice(idx, 1);
-    
+
     cardsPlay2CastleSel.push(...stealCastle);
     cardsPlay2CastleSel.sort((a, b) => a.position - b.position);
-    //restCardsPlayers = restCardsPlayers.concat = cardsPlay2Diamond.splice(0, 3);
     restCardsPlayers = restCardsPlayers.concat(cardsPlay2Diamond.splice(0, 3));
     cardsPlay2Diamond.splice(0, '');
 
@@ -449,14 +316,10 @@ function selectCard2(event) {
     }
   } else {
     if (cards.size === 0) {
-      
       cards = shufflingCards(restCardsPlayers.length);
       cont = 0;
-      //randomCards(restCardsPlayers);
     }
-    
     if (cards.get(cont).name === 'undefined') {
-      
     }
     switch (cards.get(cont).name) {
       case 'diamond': {
@@ -464,40 +327,26 @@ function selectCard2(event) {
         break;
       }
       case 'fairy': {
-        
         cardsPlay2Fairy.push(cards.get(cont));
         break;
       }
       case 'witch': {
-        //pushCardCont = true;
-        let messageWitch = window.alert('Jugador2: Has seleccionada una bruja');
+        let messageWitch = window.alert('Jugador2: Has seleccionado una bruja');
         restCardsPlayers = restCardsPlayers.concat(cards.get(cont));
         if (cardsPlay2Fairy.length > 0) {
-          /*restCardsPlayers = restCardsPlayers.concat = cardsPlay2Fairy.splice(
-            0,
-            1,
-          );*/
           restCardsPlayers.push(...cardsPlay2Fairy.splice(0, 1));
-          /*restCardsPlayers = restCardsPlayers.concat(
-            cardsPlay2Fairy.splice(0, 1),
-          );*/
         } else {
-          cardWitch();
+          cardWitch2();
         }
         break;
       }
       case 'castle': {
-        console.log('entro en switch castle Jugador1');
         if (colorCastlePlay1Selec !== cards.get(cont).color) {
           if (!castSelectPlay2) {
             castSelectPlay2 = true;
             colorCastlePlay2Selec = cards.get(cont).color;
             cardsPlay2CastleSel.push(cards.get(cont));
             cardsPlay2CastleSel.sort((a, b) => a.position - b.position);
-            console.log(
-              'color del Castillo seleccionada jugador2 ' +
-                colorCastlePlay2Selec,
-            );
           } else if (cards.get(cont).color === colorCastlePlay2Selec) {
             cardsPlay2CastleSel.push(cards.get(cont));
             cardsPlay2CastleSel.sort((a, b) => a.position - b.position);
@@ -507,11 +356,9 @@ function selectCard2(event) {
             }
           } else {
             cardsPlay2RestCastle.push(cards.get(cont));
-            cardsPlay2RestCastle.sort((a, b) => a.position - b.position);
           }
         } else {
           cardsPlay2RestCastle.push(cards.get(cont));
-          cardsPlay2RestCastle.sort((a, b) => a.position - b.position);
         }
         cardsPlay2.push(cards.get(cont));
         break;
@@ -529,18 +376,16 @@ function selectCard2(event) {
     document.getElementById('butPla2').disabled = true;
   }
 }
+
 function cardWitch() {
   let cardsTe = new Array();
-  console.log('es una bruja ' + cards.get(cont).name);
 
-  console.log('jugardor 2 has encontrado una bruja');
   cardsTe = new Array(
     ...cardsPlay2RestCastle,
     ...cardsPlay2Diamond,
     ...cardsPlay2CastleSel,
   );
 
-  
   if (cardsTe.length > 2) {
     restCardsPlayers = restCardsPlayers.concat(cardsTe.splice(0, 3));
   } else {
@@ -555,7 +400,7 @@ function cardWitch() {
       }
     }
   }
-  
+
   cardsPlay2Diamond = cardsTe.filter((element) => element.name === 'diamond');
   cardsPlay2CastleSel = cardsTe.filter(
     (element) =>
@@ -578,16 +423,12 @@ function cardWitch() {
 
 function cardWitch1() {
   let cardsTe = new Array();
-  console.log('es una bruja ' + cards.get(cont).name);
-
-  console.log('jugardor 1 has encontrado una bruja');
   cardsTe = new Array(
     ...cardsPlay1RestCastle,
     ...cardsPlay1Diamond,
     ...cardsPlay1CastleSel,
   );
 
-  
   if (cardsTe.length > 2) {
     restCardsPlayers = restCardsPlayers.concat(
       (restCardsPlayers = cardsTe.splice(0, 3)),
@@ -604,7 +445,7 @@ function cardWitch1() {
       }
     }
   }
-  
+
   cardsPlay1Diamond = cardsTe.filter((element) => element.name === 'diamond');
   cardsPlay1CastleSel = cardsTe.filter(
     (element) =>
@@ -627,13 +468,13 @@ function cardWitch1() {
 
 document.addEventListener('DOMContentLoaded', function () {
   tabPlayer1CastleSelec = document.getElementById('table1');
-  tabPlayer1CastleSelec2=document.getElementById('table1_2');
+  tabPlayer1CastleSelec2 = document.getElementById('table1_2');
   tabPlayer1Diamond = document.getElementById('table2');
   tabPlayer1Fairy = document.getElementById('table3');
   tabPlayer1ResC = document.getElementById('table4');
 
   tabPlayer2CastleSelec = document.getElementById('table5');
-  tabPlayer2CastleSelec2=document.getElementById('table5_2');
+  tabPlayer2CastleSelec2 = document.getElementById('table5_2');
   tabPlayer2Diamond = document.getElementById('table6');
   tabPlayer2Fairy = document.getElementById('table7');
   tabPlayer2ResC = document.getElementById('table8');
@@ -649,7 +490,6 @@ document.addEventListener('DOMContentLoaded', function () {
 // Función que devuelve la carta seleccionada al azar - total son 55 cartas
 // se cambiara el valor max dependiendo del número de cartas restantes
 function randomCards(contC) {
-  
   let j = 0;
   let min = 0;
   let orderCard = new Array();
@@ -662,11 +502,8 @@ function randomCards(contC) {
       j++;
     }
   }
-  console.table('Resultado array orderCard ' + orderCard);
   return orderCard;
 }
-
-//let arrayCard;
 
 function addCards() {
   castSelectPlay1 = false;
@@ -676,9 +513,9 @@ function addCards() {
     arrayCard[j] = new Fairy('fairy', j, '<img src="/dist/Hada.png"/>');
     j++;
   }
-
+  //Esta parte está sin implementar
   for (let i = 0; i < 8; i++) {
-    arrayCard[j] = new Witch('witch', j, `imageWitch${j}`);
+    arrayCard[j] = new Witch('witch', j, '<img src="/dist/bruja.png"/>');
     j++;
   }
   for (let i = 0; i < 20; i++) {
@@ -730,13 +567,11 @@ function addCards() {
 
 //Empieza el Juego y mezcalmos las cartas
 function shufflingCards(contNumCards) {
-  
   let arrCard = new Array();
   let shufflingC = new Map();
   let ranC = randomCards(contNumCards);
   //Resto de rondas
   if (contNumCards < 55) {
-    
     arrCard = restCardsPlayers;
     //Primera ronda
   } else {

@@ -18,18 +18,18 @@ h1 {
   width: 800px;
   margin-left: 2rem;
 }
-#table1 tr>td,
-#table1_2 tr>td,
-#table4 tr>td,
-#table5 tr>td,
-#table5_2 tr>td,
-#table8 tr>td {
-  margin-left: 0em;
-  margin-right: 0em;
+#table1 tr > td,
+#table1_2 tr > td,
+#table4 tr > td,
+#table5 tr > td,
+#table5_2 tr > td,
+#table8 tr > td {
+  margin-left: 0rem;
+  margin-right: 0rem;
   border-collapse: collapse;
-  padding-left: 0em;
-  padding-right: 0em;
-  padding-top: 0ren;
+  padding-left: 0rem;
+  padding-right: 0rem;
+  padding-top: 0rren;
 }
 
 #table1,
