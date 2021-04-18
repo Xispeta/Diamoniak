@@ -220,6 +220,7 @@ function selectCard1(event) {
     if (cardsPlay1CastleSel.length === 6) {
       winner = true;
       let messageWinPlay1 = window.alert('Jugador1: Has ganado');
+      document.getElementById('butPla2').disabled = true;
     }
   } else {
     if (cards.size === 0) {
@@ -319,8 +320,7 @@ function selectCard2(event) {
       cards = shufflingCards(restCardsPlayers.length);
       cont = 0;
     }
-    if (cards.get(cont).name === 'undefined') {
-    }
+
     switch (cards.get(cont).name) {
       case 'diamond': {
         cardsPlay2Diamond.push(cards.get(cont));
@@ -430,9 +430,7 @@ function cardWitch1() {
   );
 
   if (cardsTe.length > 2) {
-    restCardsPlayers = restCardsPlayers.concat(
-      (restCardsPlayers = cardsTe.splice(0, 3)),
-    );
+    restCardsPlayers = restCardsPlayers.concat(cardsTe.splice(0, 3));
   } else {
     switch (cardsTe.length) {
       case 2: {
@@ -506,7 +504,8 @@ function randomCards(contC) {
 }
 
 function addCards() {
-  castSelectPlay1 = false;
+  debugger;
+  //castSelectPlay1 = false;
   let arrayCard = new Array();
   let j = 0;
   for (let i = 0; i < 3; i++) {

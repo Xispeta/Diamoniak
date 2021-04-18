@@ -44,8 +44,8 @@ h1 {
 #table8 {
   display: flex;
   flex-wrap: wrap;
-  -webkit-flex-wrap: wrap;
-  flex-direction: row;
+  /*-webkit-flex-wrap: wrap;
+  flex-direction: row;*/
   align-items: flex-start;
   flex-direction: row;
   width: 800px;
